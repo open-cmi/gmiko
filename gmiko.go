@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/open-cmi/gmiko/devices/cisco"
+	"github.com/open-cmi/gmiko/devices/fortinet"
 	"github.com/open-cmi/gmiko/devices/h3c"
 	"github.com/open-cmi/gmiko/devices/huawei"
 	"github.com/open-cmi/gmiko/devices/ruijie"
@@ -23,6 +24,8 @@ func NewDevice(manu string, deviceOS string, host string, port int, username str
 		device, err = cisco.NewDevice(deviceOS, host, port, username, password)
 	} else if manu == "ruijie" {
 		device, err = ruijie.NewDevice(deviceOS, host, port, username, password)
+	} else if manu == "fortinet" {
+		device, err = fortinet.NewDevice(deviceOS, host, port, username, password)
 	} else {
 		return nil, fmt.Errorf("not supported manufature")
 	}

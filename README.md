@@ -88,6 +88,27 @@ ruijie
 	fmt.Printf("Version: %s\n", string(v))
 ```
 
+fortinet
+```
+d, err := gmiko.NewDevice("fortinet", "fortios", "host", 22, "username", "password")
+	if err != nil {
+		log.Fatalf("gmiko new device failed: %s\n", err.Error())
+	}
+
+	err = d.Connect(3)
+	if err != nil {
+		log.Fatalf("gmiko connect device failed: %s\n", err.Error())
+	}
+	defer d.Disconnect()
+
+	v, err := d.RunCommand("get system status")
+	if err != nil {
+		log.Fatalf("gmiko run command failed: %s\n", err.Error())
+	}
+	fmt.Printf("%s\n", string(v))
+```
+![fortinet](./images/fortinet.jpg "fortinet fortios")
+
 # support device
 |  manufacture   |  os  |
 |  ----     |    ----    |  
@@ -95,5 +116,6 @@ ruijie
 | huawei    |   vrp      |
 | cisco     |   ios      |
 | ruijie    |   rgos     |
+| fortinet  |   fortios  |
 
 # todo list
