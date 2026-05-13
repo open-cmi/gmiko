@@ -6,6 +6,7 @@ import (
 	"github.com/open-cmi/gmiko/devices/cisco"
 	"github.com/open-cmi/gmiko/devices/fortinet"
 	"github.com/open-cmi/gmiko/devices/h3c"
+	"github.com/open-cmi/gmiko/devices/hillstone"
 	"github.com/open-cmi/gmiko/devices/huawei"
 	"github.com/open-cmi/gmiko/devices/ruijie"
 	"github.com/open-cmi/gmiko/types"
@@ -16,17 +17,20 @@ func NewDevice(manu string, deviceOS string, host string, port int, username str
 	var err error
 
 	//create the Device
-	if manu == "h3c" {
+	switch manu {
+	case "h3c":
 		device, err = h3c.NewDevice(deviceOS, host, port, username, password)
-	} else if manu == "huawei" {
+	case "huawei":
 		device, err = huawei.NewDevice(deviceOS, host, port, username, password)
-	} else if manu == "cisco" {
+	case "cisco":
 		device, err = cisco.NewDevice(deviceOS, host, port, username, password)
-	} else if manu == "ruijie" {
+	case "ruijie":
 		device, err = ruijie.NewDevice(deviceOS, host, port, username, password)
-	} else if manu == "fortinet" {
+	case "fortinet":
 		device, err = fortinet.NewDevice(deviceOS, host, port, username, password)
-	} else {
+	case "hillstone":
+		device, err = hillstone.NewDevice(deviceOS, host, port, username, password)
+	default:
 		return nil, fmt.Errorf("not supported manufature")
 	}
 

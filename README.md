@@ -107,7 +107,30 @@ d, err := gmiko.NewDevice("fortinet", "fortios", "host", 22, "username", "passwo
 	}
 	fmt.Printf("%s\n", string(v))
 ```
+
 ![fortinet](./images/fortinet.jpg "fortinet fortios")
+
+hillstone
+```
+d, err := gmiko.NewDevice("hillstone", "stoneos", "host", 22, "username", "password")
+	if err != nil {
+		log.Fatalf("gmiko new device failed: %s\n", err.Error())
+	}
+
+	err = d.Connect(3)
+	if err != nil {
+		log.Fatalf("gmiko connect device failed: %s\n", err.Error())
+	}
+	defer d.Disconnect()
+
+	v, err := d.RunCommand("show version")
+	if err != nil {
+		log.Fatalf("gmiko run command failed: %s\n", err.Error())
+	}
+	fmt.Printf("%s\n", string(v))
+```
+
+![hillstone](./images/hillstone.png "hillstone firewall")
 
 # support device
 |  manufacture   |  os  |
@@ -117,5 +140,6 @@ d, err := gmiko.NewDevice("fortinet", "fortios", "host", 22, "username", "passwo
 | cisco     |   ios      |
 | ruijie    |   rgos     |
 | fortinet  |   fortios  |
+| hillstone |   stoneos  |
 
 # todo list
