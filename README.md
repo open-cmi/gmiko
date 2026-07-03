@@ -132,6 +132,29 @@ d, err := gmiko.NewDevice("hillstone", "stoneos", "host", 22, "username", "passw
 
 ![hillstone](./images/hillstone.png "hillstone firewall")
 
+
+topsec
+```
+d, err := gmiko.NewDevice("topsec", "ngtos", "host", 22, "username", "password")
+	if err != nil {
+		log.Fatalf("gmiko new device failed: %s\n", err.Error())
+	}
+
+	err = d.Connect(3)
+	if err != nil {
+		log.Fatalf("gmiko connect device failed: %s\n", err.Error())
+	}
+	defer d.Disconnect()
+
+	v, err := d.RunCommand("system version")
+	if err != nil {
+		log.Fatalf("gmiko run command failed: %s\n", err.Error())
+	}
+	fmt.Printf("%s\n", string(v))
+```
+
+![topsec](./images/topsec-ngtos.png "topsec firewall")
+
 # support device
 |  manufacture   |  os  |
 |  ----     |    ----    |  
@@ -141,5 +164,6 @@ d, err := gmiko.NewDevice("hillstone", "stoneos", "host", 22, "username", "passw
 | ruijie    |   rgos     |
 | fortinet  |   fortios  |
 | hillstone |   stoneos  |
+| topsec    |   ngtos    |
 
 # todo list

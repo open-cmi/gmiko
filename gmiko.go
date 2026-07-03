@@ -9,6 +9,7 @@ import (
 	"github.com/open-cmi/gmiko/devices/hillstone"
 	"github.com/open-cmi/gmiko/devices/huawei"
 	"github.com/open-cmi/gmiko/devices/ruijie"
+	"github.com/open-cmi/gmiko/devices/topsec"
 	"github.com/open-cmi/gmiko/types"
 )
 
@@ -30,6 +31,8 @@ func NewDevice(manu string, deviceOS string, host string, port int, username str
 		device, err = fortinet.NewDevice(deviceOS, host, port, username, password)
 	case "hillstone":
 		device, err = hillstone.NewDevice(deviceOS, host, port, username, password)
+	case "topsec":
+		device, err = topsec.NewDevice(deviceOS, host, port, username, password)
 	default:
 		return nil, fmt.Errorf("not supported manufature")
 	}
