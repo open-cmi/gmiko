@@ -13,5 +13,5 @@ func NewDevice(deviceOS string, host string, port int, user string, password str
 		return rgos.NewDevice(host, port, user, password), nil
 	}
 
-	return nil, fmt.Errorf("not supported device type")
+	return nil, fmt.Errorf("not supported device os")
 }
